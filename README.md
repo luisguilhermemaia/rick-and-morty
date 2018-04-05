@@ -30,7 +30,7 @@ Your app is ready to be deployed!
 
 ## Author
 
-* **Guilherme Maia** - _Initial work_ - [PurpleBooth](https://github.com/luisguilhermemaia)
+* **Guilherme Maia** - _Initial work_ - [Github](https://github.com/luisguilhermemaia)
 
 ## License
 
