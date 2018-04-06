@@ -26,6 +26,7 @@ const Character = ({ character }) => {
           <CardTitle>{character.name}</CardTitle>
           <CardText>
             <ListGroup>
+              <ListGroupItem>ID: {character.id}</ListGroupItem>
               <ListGroupItem>Status: {character.status}</ListGroupItem>
               <ListGroupItem>Species: {character.species}</ListGroupItem>
               <ListGroupItem>Gender: {character.gender}</ListGroupItem>

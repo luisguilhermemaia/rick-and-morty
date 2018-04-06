@@ -1,14 +1,18 @@
 import {
   REQUEST_CHARACTERS,
   RECEIVE_CHARACTERS,
-  FILTER_CHARACTERS
+  FILTER_CHARACTERS,
+  RECEIVE_CHARACTERS_B,
+  CHANGE_TO_B,
+  CHANGE_TO_A
 } from "../constants/Page";
 
 const initialState = {
   isFetched: false,
   info: {},
   characters: [],
-  displayedCharacters: []
+  displayedCharacters: [],
+  page_b: false
 };
 
 export default function character(state = initialState, action) {
@@ -20,13 +24,37 @@ export default function character(state = initialState, action) {
       };
 
     case RECEIVE_CHARACTERS:
-      let characters = action.characters;
-
       return {
         ...state,
-        characters,
-        displayedCharacters: characters.slice(0, 60),
-        isFetched: false
+        info: action.info,
+        characters: action.characters,
+        displayedCharacters: action.characters.slice(0, 10),
+        isFetched: false,
+        page_b: false
+      };
+
+    case RECEIVE_CHARACTERS_B:
+      return {
+        ...state,
+        info: action.info,
+        characters: action.characters,
+        displayedCharacters: action.characters.slice(10, 20),
+        isFetched: false,
+        page_b: true
+      };
+
+    case CHANGE_TO_B:
+      return {
+        ...state,
+        page_b: true,
+        displayedCharacters: state.characters.slice(10, 20)
+      };
+
+    case CHANGE_TO_A:
+      return {
+        ...state,
+        page_b: false,
+        displayedCharacters: state.characters.slice(0, 10)
       };
 
     case FILTER_CHARACTERS:
