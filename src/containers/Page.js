@@ -11,7 +11,17 @@ import {
   CardGroup,
   Pagination,
   PaginationItem,
-  PaginationLink
+  PaginationLink,
+  Navbar,
+  NavbarToggler,
+  NavbarBrand,
+  Nav,
+  NavItem,
+  NavLink,
+  UncontrolledDropdown,
+  DropdownToggle,
+  DropdownMenu,
+  Jumbotron
 } from "reactstrap";
 
 class Page extends Component {
@@ -60,36 +70,51 @@ class Page extends Component {
       backgroundColor: "hsla(0,0%,0%,0.8)"
     };
 
-    let style = { maxWidth: "100%" };
+    const imgUrl =
+      "https://vignette.wikia.nocookie.net/rickandmorty/images/9/95/Rick-And-Morty-Wallpaper-Iphone.jpg/revision/latest?cb=20171014062033";
+
+    let style = {
+      maxWidth: "100%",
+      backgroundImage: "url(" + imgUrl + ")"
+    };
 
     return (
       <Container style={style}>
-        <Row>
-          <Col sm="12" md={{ size: 8, offset: 4 }}>
-            <Search onChange={this.handleSearch.bind(this)} />
-          </Col>
-        </Row>
+        <Jumbotron>
+          <Navbar color="light" light expand="md">
+            <NavbarBrand href="#">THE RICK AND MORTY</NavbarBrand>
+            <Nav className="ml-auto" navbar>
+              <NavItem>
+                <Search onChange={this.handleSearch.bind(this)} />
+              </NavItem>
+            </Nav>
+          </Navbar>
+        </Jumbotron>
         <Row style={charactersRowStyle}>
           <CardGroup>{isFetched ? <p>Loading...</p> : characters}</CardGroup>
         </Row>
-        <Pagination>
-          <PaginationItem>
-            <PaginationLink last onClick={firstPage}>
-              First Page
-            </PaginationLink>
-          </PaginationItem>
-          <PaginationItem>
-            <PaginationLink previous onClick={prevPage} />
-          </PaginationItem>
-          <PaginationItem>
-            <PaginationLink next onClick={nextPage} />
-          </PaginationItem>
-          <PaginationItem>
-            <PaginationLink last onClick={lastPage}>
-              Last Page
-            </PaginationLink>
-          </PaginationItem>
-        </Pagination>
+        <Row>
+          <Col sm="12" md={{ size: 8, offset: 8 }}>
+            <Pagination>
+              <PaginationItem>
+                <PaginationLink last onClick={firstPage}>
+                  First Page
+                </PaginationLink>
+              </PaginationItem>
+              <PaginationItem>
+                <PaginationLink previous onClick={prevPage} />
+              </PaginationItem>
+              <PaginationItem>
+                <PaginationLink next onClick={nextPage} />
+              </PaginationItem>
+              <PaginationItem>
+                <PaginationLink last onClick={lastPage}>
+                  Last Page
+                </PaginationLink>
+              </PaginationItem>
+            </Pagination>
+          </Col>
+        </Row>
       </Container>
     );
   }

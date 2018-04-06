@@ -61,17 +61,6 @@ export function changeToA() {
   };
 }
 
-// export function fetchCharacters(pageNumber = "") {
-//   return dispatch => {
-//     dispatch(requestCharacters());
-//     return fetch(
-//       `https://rickandmortyapi.com/api/character/?page=${pageNumber}`
-//     )
-//       .then(response => response.json())
-//       .then(json => dispatch(receiveCharacters(json)));
-//   };
-// }
-
 export function filterCharacters(searchTerm) {
   return {
     type: FILTER_CHARACTERS,

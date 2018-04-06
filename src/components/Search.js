@@ -1,9 +1,10 @@
 import React from "react";
+import { Input } from "reactstrap";
 
 const Search = ({ onChange }) => (
-  <input
-    type="text"
+  <Input
     onChange={onChange}
+    type="text"
     placeholder="Enter character name..."
   />
 );

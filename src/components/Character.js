@@ -8,19 +8,20 @@ import {
   CardSubtitle,
   Button,
   ListGroup,
-  ListGroupItem
+  ListGroupItem,
+  Jumbotron
 } from "reactstrap";
 
 const Character = ({ character }) => {
   let divStyle = {
-    maxWidth: "300px",
+    maxWidth: "280px",
     fontSize: "12px",
-    marginLeft: "15px"
+    margin: "15px 15px"
   };
 
   return (
     <div style={divStyle}>
-      <Card>
+      <Card height="100%">
         <CardImg top width="100%" src={character.image} alt="Card image cap" />
         <CardBody>
           <CardTitle>{character.name}</CardTitle>
@@ -34,7 +35,6 @@ const Character = ({ character }) => {
               <ListGroupItem>
                 Last Location: {character.location.name}
               </ListGroupItem>
-              <ListGroupItem>Created: {character.created}</ListGroupItem>
             </ListGroup>
           </CardText>
           <Button>Complete Profile</Button>
