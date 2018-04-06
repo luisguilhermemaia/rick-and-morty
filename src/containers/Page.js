@@ -90,9 +90,9 @@ class Page extends Component {
             </Nav>
           </Navbar>
         </Jumbotron>
-        <Row style={charactersRowStyle}>
-          <CardGroup>{isFetched ? <p>Loading...</p> : characters}</CardGroup>
-        </Row>
+        <CardGroup style={charactersRowStyle}>
+          {isFetched ? <p>Loading...</p> : characters}
+        </CardGroup>
         <Row>
           <Col sm="12" md={{ size: 8, offset: 8 }}>
             <Pagination>
