@@ -13,14 +13,18 @@ import {
   PaginationItem,
   PaginationLink,
   Navbar,
-  NavbarToggler,
   NavbarBrand,
   Nav,
   NavItem,
-  NavLink,
-  UncontrolledDropdown,
+  Dropdown,
+  CardBody,
+  Card,
+  ListGroup,
+  ListGroupItem,
   DropdownToggle,
   DropdownMenu,
+  DropdownItem,
+  Collapse,
   Jumbotron
 } from "reactstrap";
 
@@ -42,7 +46,7 @@ class Page extends Component {
 
     const nextPage = () => {
       const pageNumber = info.next.slice(-1);
-      if (pageNumber == "") return;
+      if (pageNumber === "") return;
 
       if (page_b) {
         this.props.pageActions.fetchCharacters(pageNumber);
@@ -53,7 +57,7 @@ class Page extends Component {
 
     const prevPage = () => {
       const pageNumber = info.prev.slice(-1);
-      if (pageNumber == "") return;
+      if (pageNumber === "") return;
 
       if (page_b) {
         this.props.pageActions.changeToA();
@@ -62,8 +66,31 @@ class Page extends Component {
       }
     };
 
+    let popoverOpen = false;
+    const togglePop = () => (popoverOpen = !popoverOpen);
+
     let characters = displayedCharacters.map((character, index) => {
-      return <Character character={character} key={index} />;
+      let getEpisodes = character.episode.map(ep => {
+        let final = ep.slice(-2);
+        if (final[0] === "/") {
+          final = ep.slice(-1);
+        }
+        return final + ", ";
+      });
+
+      getEpisodes[getEpisodes.length - 1] = getEpisodes[
+        getEpisodes.length - 1
+      ].replace(", ", "");
+
+      return (
+        <div>
+          <Character
+            getEpisodes={getEpisodes}
+            character={character}
+            key={index}
+          />
+        </div>
+      );
     });
 
     let charactersRowStyle = {
@@ -84,6 +111,17 @@ class Page extends Component {
           <Navbar color="light" light expand="md">
             <NavbarBrand href="#">THE RICK AND MORTY</NavbarBrand>
             <Nav className="ml-auto" navbar>
+              {/* <NavItem>
+                <Dropdown isOpen={true}>
+                  <DropdownToggle caret>Filtros</DropdownToggle>
+                  <DropdownMenu>
+                    <DropdownItem>status</DropdownItem>
+                    <DropdownItem>species</DropdownItem>
+                    <DropdownItem>type</DropdownItem>
+                    <DropdownItem>gender</DropdownItem>
+                  </DropdownMenu>
+                </Dropdown>
+              </NavItem> */}
               <NavItem>
                 <Search onChange={this.handleSearch.bind(this)} />
               </NavItem>
