@@ -16,25 +16,12 @@ import {
   NavbarBrand,
   Nav,
   NavItem,
-  Dropdown,
-  CardBody,
-  Card,
-  ListGroup,
-  ListGroupItem,
-  DropdownToggle,
-  DropdownMenu,
-  DropdownItem,
-  Collapse,
   Jumbotron
 } from "reactstrap";
 
 class Page extends Component {
   componentDidMount() {
     this.props.pageActions.fetchCharacters();
-  }
-
-  handleSearch(e) {
-    this.props.pageActions.filterCharacters(e.target.value);
   }
 
   render() {
@@ -65,9 +52,6 @@ class Page extends Component {
         this.props.pageActions.fetchCharactersB(pageNumber);
       }
     };
-
-    let popoverOpen = false;
-    const togglePop = () => (popoverOpen = !popoverOpen);
 
     let characters = displayedCharacters.map((character, index) => {
       let getEpisodes = character.episode.map(ep => {
@@ -109,28 +93,21 @@ class Page extends Component {
       <Container style={style}>
         <Jumbotron>
           <Navbar color="light" light expand="md">
-            <NavbarBrand href="#">THE RICK AND MORTY</NavbarBrand>
-            <Nav className="ml-auto" navbar>
-              {/* <NavItem>
-                <Dropdown isOpen={true}>
-                  <DropdownToggle caret>Filtros</DropdownToggle>
-                  <DropdownMenu>
-                    <DropdownItem>status</DropdownItem>
-                    <DropdownItem>species</DropdownItem>
-                    <DropdownItem>type</DropdownItem>
-                    <DropdownItem>gender</DropdownItem>
-                  </DropdownMenu>
-                </Dropdown>
-              </NavItem> */}
-              <NavItem>
-                <Search onChange={this.handleSearch.bind(this)} />
-              </NavItem>
-            </Nav>
+            <NavbarBrand href="#">THE RICK AND MORTY CHARACTERS</NavbarBrand>
           </Navbar>
         </Jumbotron>
-        <CardGroup style={charactersRowStyle}>
-          {isFetched ? <p>Loading...</p> : characters}
-        </CardGroup>
+        <Row>
+          <Col sm="9">
+            <CardGroup style={charactersRowStyle}>
+              {isFetched ? <p>Loading...</p> : characters}
+            </CardGroup>
+          </Col>
+          <Col sm="3">
+            <Jumbotron>
+              <Search teste={this.props.pageActions} />
+            </Jumbotron>
+          </Col>
+        </Row>
         <Row>
           <Col sm="12" md={{ size: 8, offset: 8 }}>
             <Pagination>

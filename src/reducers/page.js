@@ -58,23 +58,13 @@ export default function character(state = initialState, action) {
       };
 
     case FILTER_CHARACTERS:
-      let displayedCharacters = state.characters
-        .filter(characters => {
-          if (
-            characters.name
-              .toLowerCase()
-              .includes(action.searchTerm.toLowerCase())
-          ) {
-            return true;
-          }
-
-          return false;
-        })
-        .slice(0, 60);
-
       return {
         ...state,
-        displayedCharacters
+        info: action.info,
+        characters: action.characters,
+        displayedCharacters: action.characters.slice(0, 10),
+        isFetched: false,
+        page_b: false
       };
 
     default:

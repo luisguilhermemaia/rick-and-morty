@@ -61,9 +61,49 @@ export function changeToA() {
   };
 }
 
-export function filterCharacters(searchTerm) {
-  return {
-    type: FILTER_CHARACTERS,
-    searchTerm
+const objtextToFilterString = obj => {
+  let url = [];
+
+  if (obj.name) url.push(`name=${obj.name}`);
+
+  if (obj.type) url.push(`type=${obj.type}`);
+
+  if (obj.species) url.push(`species=${obj.species}`);
+
+  if (obj.gender) url.push(`gender=${obj.gender}`);
+
+  if (obj.status) url.push(`status=${obj.status}`);
+
+  const reducer = (accumulator, currentValue) =>
+    accumulator + "&" + currentValue;
+
+  url = url.reduce(reducer);
+
+  return url;
+};
+
+export function filterCharacters(filterObj) {
+  const searchUrl = objtextToFilterString(filterObj);
+  return dispatch => {
+    // dispatch(requestCharacters());
+    return fetch(`https://rickandmortyapi.com/api/character/?${searchUrl}`)
+      .then(response => response.json())
+      .then(json =>
+        dispatch({
+          type: FILTER_CHARACTERS,
+          info: json.info,
+          characters: json.results
+        })
+      );
   };
+
+  // fetch(`https://rickandmortyapi.com/api/character/?${searchUrl}`)
+  //   .then(response => response.json())
+  //   .then(filteredCharacters => {
+  //     return {
+  //       type: FILTER_CHARACTERS,
+  //       info: json.info,
+  //       characters: json.results
+  //     };
+  //   });
 }
